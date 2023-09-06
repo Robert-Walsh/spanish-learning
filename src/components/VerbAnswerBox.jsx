@@ -12,9 +12,7 @@ export function VerbAnswerBox({next, selectedVerb, verbForm}){
   const [correct, setCorrect] = useState(false)
   const [answered, setAnswered] = useState(false)
 
-  console.log('VAB', selectedVerb)
-
-  const { infinitive, infinitive_english } = selectedVerb
+  const { infinitive, infinitive_english, mood, tense } = selectedVerb
 
   const onNextClicked = (e) => {
     e.preventDefault()
@@ -23,7 +21,6 @@ export function VerbAnswerBox({next, selectedVerb, verbForm}){
     setAnswered(false)
     next()
   }
-
 
   const onChange = (e) => {
     setAnswer(e.target.value)
@@ -45,14 +42,11 @@ export function VerbAnswerBox({next, selectedVerb, verbForm}){
     setCorrect(correct)
   }
 
-  console.log('answer', answer)
-
-
   return (
     <Card className="place-items-center flex flex-col justify-center w-96 min-w-96 max-w-96 h-72 min-h-72 max-h-72">
       <CardContent>
         <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom className="place-items-center flex flex-col justify-center"> 
-          What is the {verbForm.name} form of {infinitive}?
+          What is the "{mood} {tense}" {verbForm.name} form of {infinitive}?
         </Typography>
 
         <Box
@@ -72,7 +66,7 @@ export function VerbAnswerBox({next, selectedVerb, verbForm}){
           <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom className="place-items-center flex flex-col justify-center"
           >
             {correct && <>You answered correctly!</>}
-            {!correct && <>You answered incorrect, the correct answer is: {verbForm.form}</>}
+            {!correct && <>You answered incorrect, the correct answer is: <b>{verbForm.form}</b></>}
             <br/> 
             It means "{infinitive_english}"
           </Typography>
