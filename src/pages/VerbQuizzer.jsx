@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 export function VerbQuizzer(){
   const [selectedNumbers, setSelectedNumbers] = useState([])
-  const [newVerbNumber, setNewVerbNumber] = useState(0)
+  const [newVerbNumber, setNewVerbNumber] = useState(-1)
 
   const presentIndicative = verbs.filter(verb => verb.mood === "Indicativo" && verb.tense === "Presente") 
 
@@ -30,7 +30,13 @@ export function VerbQuizzer(){
   }
 
 
-  const selectedVerb = presentIndicative[newVerbNumber]
+  let selectedVerb = presentIndicative[newVerbNumber]
+
+  if(newVerbNumber === - 1){
+    const length = presentIndicative.length
+
+    selectedVerb = presentIndicative[Math.floor(Math.random() * length)]
+  }
 
   const verbForm = getSelectedVerbForm(selectedVerb)
   
